@@ -8,7 +8,7 @@ async def root():
 
 
 @app.get("/url")
-async def urk():
+async def url():
   return{"url" : "https://python.org"}
   
 #Iniciar el server -> uvicorn main:app --reload
