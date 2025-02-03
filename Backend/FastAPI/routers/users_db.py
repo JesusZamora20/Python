@@ -1,24 +1,19 @@
-from fastapi import APIRouter, HTTPException
-from pydantic import BaseModel
+from fastapi import APIRouter, HTTPException, status
+from db.models.user import User
+from db.schemas.user import user_schema
+from db.client import db_client
+
 
 
 router = APIRouter(prefix="/userdb",
                    tags=["userdb"],
-                   responses = {404: {"message": "Not found"}})
+                   responses = {status.HTTP_404_NOT_FOUND: {"message": "Not found"}})
 
 
 #inicia el server -> uvicorn users:app --reload
-class User(BaseModel):
-  id: int
-  name: str
-  surname: str
-  url: str
-  age: int
 
-users_list = [User(id=1,name="Brais",surname= "Moure", url="https://moure.dev", age=35),
-         User(id=2,name="jesus", surname="zamora", url="https://moure.dev", age=23),
-         User(id=3,name="yolanda", surname="lozano", url="https://moure.dev", age=25)]
-  
+
+users_list = []
  
 @router.get("/")
 async def users():
@@ -34,16 +29,23 @@ async def user(id: int):
 async def user(id: int):
   return search_user(id)
 
-#post  
 
-@router.post("/", status_code=201)
+#post  
+@router.post("/",response_model=User, status_code=status.HTTP_201_CREATED)
 async def user(user: User):
-  if type(search_user(user.id)) == User:
+  #if type(search_user(user.id)) == User:
     #return {"Error": "User already exists"}
-    raise HTTPException(status_code=204, detail="User already exists")
-  else:
-      users_list.append(user)
-      return user
+    #raise HTTPException(status.HTTP_404_NOT_FOUND, detail="User already exists")
+  
+  user_dict = dict(user)
+  del user_dict["id"]
+
+  id = db_client.local.users.insert_one(user_dict).inserted_id
+
+  new_user = user_schema(db_client.local.users.find_one({"_id": id}))
+
+  return User(**new_user)
+
 
 #put
 @router.put("/")
