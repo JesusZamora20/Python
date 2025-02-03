@@ -1,17 +1,11 @@
 from fastapi import APIRouter, HTTPException, status
-from db.models.user import User
-from db.schemas.user import user_schema
-from db.client import db_client
-
-
+from Backend.FastAPI.MongoDBConnection.db.models.user import User
+from Backend.FastAPI.MongoDBConnection.db.schemas.user import user_schema
+from Backend.FastAPI.MongoDBConnection.db.client import db_client
 
 router = APIRouter(prefix="/userdb",
                    tags=["userdb"],
                    responses = {status.HTTP_404_NOT_FOUND: {"message": "Not found"}})
-
-
-#inicia el server -> uvicorn users:app --reload
-
 
 users_list = []
  
