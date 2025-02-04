@@ -5,12 +5,19 @@ config = {
     'user': 'root',
     'password': 'mysqlpass872@',
     'host': 'localhost',
-    'database': 'sakila',
+    'database': 'testdb',
     'raise_on_warnings': True
 }
 
-# Establecer la conexión
+# Establish the connection
 conexion = mysql.connector.connect(**config)
 cursor = conexion.cursor()
 
-print(conexion)
+#cursor.execute("create database testdb")
+#cursor.execute("create table students (name varchar(255), age integer)")
+cursor.execute("show tables")
+
+
+
+
+print(conexion, " Conexion exitosa")
