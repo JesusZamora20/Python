@@ -1,7 +1,7 @@
 # virtual environment 
 
 # py -m venv .venv
-# source .venv/Scripts/activate
+# .venv/Scripts/activate
 # deactivate
 
 #______________________
