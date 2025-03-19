@@ -10,7 +10,7 @@ frame.pack()
 
 #saving user info
 user_info_frame = tk.LabelFrame(frame, text="user info")
-user_info_frame.grid(row=0, column=0, padx=20, pady=20)
+user_info_frame.grid(row=0, column=0, padx=20, pady=10)
 
 first_name_label = tk.Label(user_info_frame, text="first name")
 first_name_label.grid(row=0, column=0)
@@ -46,7 +46,7 @@ for widget in user_info_frame.winfo_children():
 
 #saving course info
 courses_info_frame = tk.LabelFrame(frame, text="courses info")
-courses_info_frame.grid(row=1, column=0, sticky="news", padx=20, pady=20)
+courses_info_frame.grid(row=1, column=0, sticky="news", padx=20, pady=10)
 
 registered_label = tk.Label(courses_info_frame, text="Registration Status")
 registered_check = tk.Checkbutton(courses_info_frame, text="currently registered")
@@ -58,6 +58,26 @@ numcourses_spinbox = tk.Spinbox(courses_info_frame, from_=0, to="infinity")
 numcourses_label.grid(row=0, column=1)
 numcourses_spinbox.grid(row=1, column=1)
 
-#33
+numsemesters_label = tk.Label(courses_info_frame, text="# semesters")
+numsemesters_spinbox = tk.Spinbox(courses_info_frame, from_=0, to="infinity")
+numsemesters_label.grid(row=0, column=2)
+numsemesters_spinbox.grid(row=1, column=2)
+
+for widget in courses_info_frame.winfo_children():
+    widget.grid_configure(padx=10, pady=5)
+
+#Accept terms
+terms_frame = tk.LabelFrame(frame, text="terms and conditions")
+terms_frame.grid(row=2, column=0, sticky="news", padx=20, pady=10)
+
+terms_check = tk.Checkbutton(terms_frame, text="I accept the terms and conditions")
+terms_check.grid(row=0, column=0)
+
+
+#BUtton
+button = tk.Button(frame, text="enter data")
+button.grid(row=3, column=0, padx=10, pady=10)
+
+
 
 tk.mainloop()
