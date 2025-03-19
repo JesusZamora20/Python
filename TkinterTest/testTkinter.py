@@ -1,6 +1,9 @@
 import tkinter as tk
 from tkinter import ttk
 
+def enter_data():
+    print("hi")
+
 window = tk.Tk()
 window.title("data entry form")
 #window.geometry("600x600")
@@ -75,7 +78,7 @@ terms_check.grid(row=0, column=0)
 
 
 #BUtton
-button = tk.Button(frame, text="enter data")
+button = tk.Button(frame, text="enter data", command=enter_data)
 button.grid(row=3, column=0, padx=10, pady=10)
 
 
