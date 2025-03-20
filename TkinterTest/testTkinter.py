@@ -1,8 +1,32 @@
 import tkinter as tk
 from tkinter import ttk
+from tkinter import messagebox
 
 def enter_data():
-    print("hi")
+
+    accepted = acceptance.get()
+
+    if accepted == "Accepted":
+        #user info
+        firstname = first_name_entry.get()
+        lastname = last_name_entry.get()
+
+        if firstname and lastname:
+            title = title_combobox.get()
+            age = age_spinbox.get()
+            nationality = nationality_combobox.get()
+
+            #courses info
+            registration_status = reg_status_var.get()
+            numcourses = numcourses_spinbox.get()
+            numsemesters = numsemesters_spinbox.get()
+            print(f"user first name: {firstname}, user last name: {lastname}")
+            print(f"Title: {title}, age is {age}, the nationality is {nationality} ")
+            print(f"number of courses: {numcourses}, number of semesters: {numsemesters}")
+            print(f"registration status: {registration_status}")
+            print("--------------------------------------------------")
+        else: tk.messagebox.showwarning(title="Warning" , message="First name and last name are required" )
+    else: tk.messagebox.showwarning(title="Warning" , message="Please Accept Terms and conditions" )
 
 window = tk.Tk()
 window.title("data entry form")
@@ -52,7 +76,13 @@ courses_info_frame = tk.LabelFrame(frame, text="courses info")
 courses_info_frame.grid(row=1, column=0, sticky="news", padx=20, pady=10)
 
 registered_label = tk.Label(courses_info_frame, text="Registration Status")
-registered_check = tk.Checkbutton(courses_info_frame, text="currently registered")
+
+reg_status_var = tk.StringVar(value="Not registered")
+registered_check = tk.Checkbutton(courses_info_frame, text="currently registered",
+                                variable=reg_status_var,
+                                onvalue="Registered", 
+                                offvalue="Not registered")
+
 registered_label.grid(row=0, column=0)
 registered_check.grid(row=1, column=0)
 
@@ -73,7 +103,11 @@ for widget in courses_info_frame.winfo_children():
 terms_frame = tk.LabelFrame(frame, text="terms and conditions")
 terms_frame.grid(row=2, column=0, sticky="news", padx=20, pady=10)
 
-terms_check = tk.Checkbutton(terms_frame, text="I accept the terms and conditions")
+acceptance = tk.StringVar(value="Not accepted")
+terms_check = tk.Checkbutton(terms_frame, text="I accept the terms and conditions",
+                                variable=acceptance,
+                                onvalue="Accepted", 
+                                offvalue="Not Accepted")
 terms_check.grid(row=0, column=0)
 
 
