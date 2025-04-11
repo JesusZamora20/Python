@@ -41,6 +41,8 @@ class Root(Calculator):
     a = self.data
     print('the result is: ', math.sqrt(a))
 
-ex = Ops()
-print(ex.enterdata())
-print(ex.add())
+object = Ops()
+
+print(isinstance(object, Ops))
+
+print(issubclass(Ops, Calculator))
